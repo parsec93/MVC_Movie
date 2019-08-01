@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.LoginProAction;
 import action.LogoutProAction;
+import action.MemberInfoAction;
+import action.MemberJoinProAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -30,6 +32,7 @@ public class MemberFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/member/LoginForm.jsp");
 		}else if (command.equals("/MemberJoinForm.me")) {
+			System.out.println("joinForm.인식");
 			forward = new ActionForward();
 			forward.setPath("/member/joinForm.jsp");
 		}else if (command.equals("/MemberLoginPro.me")) {
@@ -42,6 +45,23 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} else if(command.equals("/MemberLogoutPro.me")) {
 			action = new LogoutProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MemberJoinPro.me")) {
+			System.out.println("MemberJoinPro 인식 FrontController");
+			action= new MemberJoinProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/MemberInfo.me")) {
+			action = new MemberInfoAction();
 			
 			try {
 				forward = action.execute(request, response);

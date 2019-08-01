@@ -1,43 +1,35 @@
+<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String sId = (String)session.getAttribute("sId");
-if(sId != null){
-	 out.println("<script>");
-	    out.println("alert('잘못된 접근입니다!')");
-	    out.println("location.href='index.jsp'");
-	    out.println("</script>");
-}
+// 	String sId = (String)session.getAttribute("sId");
+// if(sId != null){
+// 	 out.println("<script>");
+// 	    out.println("alert('잘못된 접근입니다!')");
+// 	    out.println("location.href='index.jsp'");
+// 	    out.println("</script>");
+// }
+
+
+	MemberBean mb = (MemberBean)request.getAttribute("mb");
 
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 <script type="text/javascript">
-	function chkEmailDomainSelect(domain){
-		document.joinForm.email2.value = domain.value;
-	}
-	
-	function chkJumin(jumin, type) {
-		if(type == 1) {
-			if(jumin.value.length == 6){
-				document.joinForm.jumin2.focus();
-			} 
-		} else {
-			if(jumin.value.length == 7){
-				document.joinForm.email1.focus();
-			}
-		} 
-	}
-
+	function changeEditMode(){
+		document.infoForm.name.readOnly = false;
+	} 
 </script>
+</head>
 <body>
-	<h1>회원가입 페이지</h1><br>
-	<form action="MemberJoinPro.me" method="post" name="joinForm">
-	이름 : <input type="text" name="name"><br>
+	<h1>회원 정보 수정 페이지</h1><br>
+	<form action="MemberJoinPro.me" method="post" name="infoForm">
+	이름 : <input type="text" name="name" readonly="readonly" value="mb.getMember_name"><br>
 	아이디 : <input type="text" name="id"> <input type="button" value="아이디 중복 확인"><br>
 	비밀번호 : <input type="text" name="password"><br>
 	성별 : <input type="radio" value="남" name="gender">남<input type="radio" value="여" name="gender">여<br>
@@ -61,7 +53,8 @@ if(sId != null){
 	</select>
 	<br>
 	전화번호 : <input type="text" name="phone1"> - <input type="text" name="phone2"> - <input type="text" name="phone3"><br><br>
-	<input type="submit" value="회원가입">&nbsp;&nbsp;<input type="button" onclick="history.back()" value="취소">
+	<input type="submit" value="회원가입">&nbsp;&nbsp;<input type="button" value="수정모드로 전환" onclick = "changeEditMode()">&nbsp;&nbsp;<input type="button" onclick="history.back()" value="취소">
 	</form>
+	
 </body>
 </html>
