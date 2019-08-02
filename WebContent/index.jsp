@@ -20,5 +20,7 @@ String sId = (String)session.getAttribute("sId");
 	</header>
 <body>
 	<h1>영화관 회원 정보</h1>
+	<a href="MovieList.mo">영화 목록</a>
+	
 </body>
 </html>
