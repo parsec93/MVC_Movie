@@ -28,7 +28,8 @@ public class MemberInfoAction implements Action {
 			 response.setContentType("text/html;charset=UTF-8");
              PrintWriter out = response.getWriter();
              out.println("<script>");
-             out.println("alert('회원정보 조회 실패!')");
+             out.println("alert('회원정보 조회 실패!')"); 
+              
              out.println("history.back()");
              out.println("</script>");
 		}else {

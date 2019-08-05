@@ -99,7 +99,36 @@ public class MovieDAO {
 	}
 	
 	
-	
+	public MovieBean getMovieInfo(int movie_idx) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MovieBean movieBean = null;
+		try {
+			String sql = "SELECT * FROM movie_info where movie_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, movie_idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				movieBean = new MovieBean();
+				movieBean.setMovie_idx(rs.getInt("movie_idx"));
+				movieBean.setMovie_title(rs.getString("movie_title"));
+				movieBean.setMovie_content(rs.getString("movie_content"));
+				movieBean.setMovie_time(rs.getInt("movie_time"));
+				movieBean.setMovie_hall_num(rs.getInt("movie_hall_num"));
+				movieBean.setMovie_start_day(rs.getDate("movie_start_day"));
+				movieBean.setMovie_end_day(rs.getDate("movie_end_day"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+				
+		return movieBean;	
+	}
 	
 	
 }

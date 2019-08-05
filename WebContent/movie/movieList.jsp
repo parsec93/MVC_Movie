@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.MovieBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,6 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
+String sId = (String)session.getAttribute("sId");
+
 //영화 목록 정보 가져오기 
 ArrayList<MovieBean> movieList = (ArrayList<MovieBean>)request.getAttribute("movieList");
 
@@ -16,8 +19,20 @@ ArrayList<MovieBean> movieList = (ArrayList<MovieBean>)request.getAttribute("mov
 String listType = (String)request.getAttribute("listType");
 String sort = (String)request.getAttribute("sort");
 
+ArrayList<String> todayMovieList = (ArrayList<String>)request.getAttribute("todayMovieList");
+ArrayList<String> todayMovieIndexList = (ArrayList<String>)request.getAttribute("todayMovieIndexList");
+
 %>
 </head>
+<header>
+		<p align="right">
+		<%if(sId != null) { %>
+			<a href="MemberInfo.me"><%=sId %>님</a> | <a href="MemberLogoutPro.me">로그아웃</a> 
+		<%} else { %>	
+			<a href="MemberLoginForm.me">로그인</a> 
+		<%} %>
+		</p>
+	</header>
 <body>
 	<h1>MovieList</h1>
 	
@@ -42,7 +57,7 @@ String sort = (String)request.getAttribute("sort");
 			MovieBean mb = (MovieBean)movieList.get(i);
 		%>	
 		<tr>
-			<td><%=mb.getMovie_title() %></td>
+			<td><a href="MovieInfoDetail.mo?idx=<%=mb.getMovie_idx()%>"><%=mb.getMovie_title() %></a></td>
 			<td><%=mb.getMovie_content() %></td>
 			<td id="td_center"><%=mb.getMovie_time() %>분</td>
 			<td id="td_center"><%=mb.getMovie_hall_num() %>관</td>
@@ -56,5 +71,25 @@ String sort = (String)request.getAttribute("sort");
 		}
 		%>
 	</table>
+	
+	<p>
+		<table>
+		<%for(int i = 0 ; i<todayMovieList.size(); i++) {%>
+			<tr>
+				<td><a href="MovieInfoDetail.mo?idx=<%=todayMovieIndexList.get(i)%>"><%=URLDecoder.decode(todayMovieList.get(i), "UTF-8") %></a>
+			</tr>
+		<%} %>
+		</table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
