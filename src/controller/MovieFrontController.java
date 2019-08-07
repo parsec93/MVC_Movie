@@ -17,7 +17,7 @@ import action.MemberJoinProAction;
 import action.MovieInfoDetailProAction;
 import action.MovieListAction;
 import action.MovieReservationAction;
-import action.MovieReservationProAcion;
+import action.MovieReservationProAction;
 import vo.ActionForward;
 
 @WebServlet("*.mo")
@@ -56,14 +56,15 @@ public class MovieFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("MovieReservationPro.mo")) {
-			action = new MovieReservationProAcion();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		}else if(command.equals("/MovieReservationPro.mo")) {
+            action = new MovieReservationProAction();
+            
+            try {
+                forward = action.execute(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 		
 		
 		

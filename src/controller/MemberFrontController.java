@@ -14,6 +14,7 @@ import action.LoginProAction;
 import action.LogoutProAction;
 import action.MemberInfoAction;
 import action.MemberJoinProAction;
+import action.MemberReservationInfoAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -62,6 +63,14 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/MemberInfo.me")) {
 			action = new MemberInfoAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MemberReservationInfo.me")) {
+			action = new MemberReservationInfoAction();
 			
 			try {
 				forward = action.execute(request, response);

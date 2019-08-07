@@ -3,11 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import vo.MovieBean;
+import vo.MovieReservationBean;
 
 import static db.JdbcUtil.*;
 
@@ -128,7 +130,31 @@ public class MovieDAO {
 		}
 				
 		return movieBean;	
-	}
+	}   
+	
+	public int insertReservation(MovieReservationBean movieReservationBean) {
+        int count = 0;
+        
+        PreparedStatement pstmt = null;
+        
+        // 영화번호, 아이디, 영화시간, 인원수, 예매금액 DB에 저장
+        String sql = "INSERT INTO reservation_info VALUES (null,?,?,?,?,?)";
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, movieReservationBean.getMovie_idx());
+            pstmt.setString(2, movieReservationBean.getMember_id());
+            pstmt.setString(3, movieReservationBean.getMovie_time());
+            pstmt.setInt(4, movieReservationBean.getMovie_people_count());
+            pstmt.setInt(5, movieReservationBean.getPee());
+            count = pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("insertReservation 에러! - " + e.getMessage());
+        }
+        
+        return count;
+    }
+	
 	
 	
 }

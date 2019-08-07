@@ -14,6 +14,9 @@ String movie_idx = request.getParameter("movie_idx");
 	function up(){
 		var rNum = document.getElementById('rNum');
 		rNum.value ++;
+		
+		var totalPrice = document.getElementById('totalPrice');
+		totalPrice.value = rNum.value*12000;
 		return;
 	}
 	
@@ -21,12 +24,17 @@ String movie_idx = request.getParameter("movie_idx");
 		var rNum = document.getElementById('rNum');
 		if(rNum.value	 > 0){
 			rNum.value --;	
+			
+			var totalPrice = document.getElementById('totalPrice');
+			totalPrice.value = rNum.value*12000;
 		} else {
 			rNum.value = 0;
 		}
 		
 		return;
 	}
+	
+	
 </script>
 <body>
 	<h1>영화 예매 페이지 </h1>
@@ -39,7 +47,7 @@ String movie_idx = request.getParameter("movie_idx");
 	<tr>
 		<td> 상영 시간 : </td>  
 		<td>
-			<select name="time">
+			<select name="reservationTime">
             	<option value=1 >12:00 ~ 13:30</option>
                 <option value=2 >14:00 ~ 15:30</option>
                 <option value=3 >16:00 ~ 17:30</option>
@@ -50,7 +58,7 @@ String movie_idx = request.getParameter("movie_idx");
 	<tr>
 		<td>인원 : </td> 
 		<td>
-			<input type="text" size="3" value="0" id="rNum" > 
+			<input type="text" name = "numOfPeople" size="3" value="0" id="rNum" readonly="readonly"> 
 			<input type="button" value="▲" onclick="up()">
 			<input type="button" value="▼" onclick="down()">
 		</td>
@@ -58,7 +66,7 @@ String movie_idx = request.getParameter("movie_idx");
 	<tr>
 		<td>최종 금액 : </td>
 		<td>
-			<input type="texts" name="pee" value="0">
+			<input type="text" name="pee" id="totalPrice" value="0">
 		</td>
 	</tr>
 	<tr>
