@@ -15,7 +15,7 @@ public class MemberReservationInfoAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("MemberReservationInfoAction");
+		System.out.println("MemberReservationInfoAction"); 
 		
 		ActionForward forward = null;
 		
