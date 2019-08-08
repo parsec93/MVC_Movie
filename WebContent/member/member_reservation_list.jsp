@@ -7,7 +7,7 @@
 	String sId = (String)session.getAttribute("sId");
 
 	// 영화 목록 정보 가져오기
-	ArrayList reservationList = (ArrayList)request.getAttribute("reservationList");
+	ArrayList<ArrayList> reservationList = (ArrayList)request.getAttribute("reservationList");
 %>    
 <!DOCTYPE html>
 <html>
@@ -59,6 +59,21 @@
 	<h1>전체 예약 목록</h1>
 	<%if(reservationList == null) {%>
 		<h1>예약 목록이 존재하지 않습니다.</h1>
+	<%}else {%>
+		 <% for(ArrayList reservationInfo : reservationList){%>
+		 		<table>
+		 		<tr>
+		 			<td>제목</td><td>영화번호</td><td>영화시간</td><td>예매인원</td><td>총금액</td>
+		 		</tr>
+		 		<tr>
+		 		<td id="td_center"><a href="MovieInfoDetail.mo?movie_idx=<%=reservationInfo.get(5)%>"><%=reservationInfo.get(0)%></a></td>
+				<td id="td_center"><%=reservationInfo.get(1) %>관</td>
+				<td id="td_center"><%=reservationInfo.get(2) %>분</td>
+				<td id="td_center"><%=reservationInfo.get(3)%>명</td>
+				<td id="td_center"><%=reservationInfo.get(4)%>원</td>
+		 		</tr>
+		 		</table>
+		 <%}%>
 	<%}%>
 </body>
 </html>

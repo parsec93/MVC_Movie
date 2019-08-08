@@ -19,7 +19,8 @@ public class MemberReservationInfoService {
 		MovieDAO movieDAO = MovieDAO.getInstace();
 		movieDAO.setConnection(con);
 		
-		ArrayList<MovieBean> reservationList = null;
+		// member_id가 일치하는 모든 예매 목록 조회
+		ArrayList reservationList = movieDAO.selectReservationList(member_id);
 		
 		close(con);
 		

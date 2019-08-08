@@ -53,7 +53,10 @@
 	</select>
 	<br>
 	전화번호 : <input type="text" name="phone1"> - <input type="text" name="phone2"> - <input type="text" name="phone3"><br><br>
-	<input type="submit" value="회원가입">&nbsp;&nbsp;<input type="button" value="수정모드로 전환" onclick = "changeEditMode()">&nbsp;&nbsp;<input type="button" onclick="history.back()" value="취소">
+	<input type="submit" value="회원가입">&nbsp;&nbsp;
+	<input type="button" value="수정모드로 전환" onclick = "changeEditMode()">&nbsp;&nbsp;
+	<input type="button" onclick="history.back()" value="취소">&nbsp;&nbsp;
+	<input type="button" onclick="location.href='MemberReservationInfo.me'" value="예매내역 확인">
 	</form>
 	
 </body>
